@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 
 //GET request to read a cookie
 export async function GET(req,res){
-    let token = req.cookies.get('theme');
+    let token = req.cookies.get('language');
     return NextResponse.json({ token });
 }
 

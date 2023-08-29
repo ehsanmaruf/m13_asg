@@ -2,17 +2,18 @@
 
 import { useEffect, useState } from "react"
 
+async function getData() {
+  const res = await fetch('api/about');
+  return res.json()
+}
+
 const HomePage = () => {
-
-  const [data, setData] = useState();
-
+  const [info, setInfo] = useState();
   useEffect(async()=>{
-    const res = await fetch('/api/about')
-    setData(res);
-    console.log(res);
+    const data = await getData();
+    setInfo(data);
   },[])
   
-
   const handleClick = async () =>{
     await fetch('/api',{
       method: "POST",
@@ -25,7 +26,8 @@ const HomePage = () => {
       <button onClick={handleClick}>Set Cookie</button>
 
       <div>
-
+          <p>{info?.message}</p>
+          <p>{info?.version}</p>
       </div>
     </div>
   )
